@@ -1,0 +1,29 @@
+{
+  "name": "pdf-preview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3"
+  },
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinicius-sabadim/pdf-preview.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinicius-sabadim/pdf-preview/issues"
+  },
+  "homepage": "https://github.com/vinicius-sabadim/pdf-preview#readme"
+}

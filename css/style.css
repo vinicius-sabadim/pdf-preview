@@ -7,32 +7,51 @@ body {
   text-align: center;
 }
 
+.loading-container {
+  align-items: center;
+  color: coral;
+  display: flex;
+  font-size: 36px;
+  height: 100vh;
+  justify-content: center;
+}
+
 .top-bar {
   background: #333;
   color: #fff;
-  padding: 1rem;
+  font-size: 24px;
+  padding: 16px;
 }
 
 .btn {
-  background: coral;
+  background-color: transparent;
   color: #fff;
   border: none;
+  font-size: 24px;
   outline: none;
   cursor: pointer;
   margin: 5px;
-  padding: 15px;
+  padding: 10px;
+  transition: all 0.5s;
 }
 
 .btn:hover {
+  color: coral;
   opacity: 0.9;
 }
 
 .page-info {
-  margin-left: 1rem;
+  border-bottom: 1px solid #ffffff;
+  margin-left: 16px;
 }
 
 .error {
   background: #d44c4c;
   color: #fff;
   padding: 16px;
+}
+
+canvas {
+  border: 1px solid #cccccc;
+  margin: 20px;
 }

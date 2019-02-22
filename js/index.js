@@ -3,21 +3,19 @@ import ReactDOM from 'react-dom'
 
 import pdf from '../docs/pdf.pdf'
 
+const scale = 1.5
+
 class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      isLoading: true,
-      isRendering: false,
-      pageCount: 0,
-      pageNum: 1,
-      pageNumIsPending: null,
-      pdfDoc: null,
-      scale: 1.5
-    }
+  state = {
+    isLoading: true,
+    isRendering: false,
+    pageCount: 0,
+    pageNum: 1,
+    pageNumIsPending: null,
+    pdfDoc: null
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     pdfjsLib
       .getDocument(pdf)
       .promise.then(data => {
@@ -29,7 +27,6 @@ class App extends React.Component {
         this.renderPage(this.state.pageNum)
       })
       .catch(err => {
-        console.log(err)
         this.setState({
           error: err.message,
           hasError: true,
@@ -38,14 +35,14 @@ class App extends React.Component {
       })
   }
 
-  renderPage(num) {
+  renderPage = num => {
     this.setState({ isRendering: true })
 
     const canvas = document.querySelector('#pdf-render')
     const ctx = canvas.getContext('2d')
 
     this.state.pdfDoc.getPage(num).then(page => {
-      const viewport = page.getViewport({ scale: this.state.scale })
+      const viewport = page.getViewport({ scale })
       canvas.height = viewport.height
       canvas.width = viewport.width
 
@@ -67,7 +64,7 @@ class App extends React.Component {
     })
   }
 
-  queueRenderPage(num) {
+  queueRenderPage = num => {
     if (this.state.isRendering) {
       this.setState({ pageNumIsPending: num })
     } else {
@@ -75,7 +72,7 @@ class App extends React.Component {
     }
   }
 
-  showPrevPage() {
+  showPrevPage = () => {
     if (this.state.pageNum <= 1) {
       return
     }
@@ -84,7 +81,7 @@ class App extends React.Component {
     this.queueRenderPage(prevPage)
   }
 
-  showNextPage() {
+  showNextPage = () => {
     if (this.state.pageNum >= this.state.pdfDoc.numPages) {
       return
     }
@@ -96,24 +93,21 @@ class App extends React.Component {
   render() {
     const { error, hasError, isLoading, pageCount, pageNum } = this.state
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading)
+      return (
+        <div className="loading-container">
+          <i className="fas fa-spinner fa-spin" />
+        </div>
+      )
     return (
       <div>
         {hasError && <div className="error">{error}</div>}
         {!hasError && (
           <div className="top-bar">
-            <button
-              className="btn"
-              id="prev-page"
-              onClick={() => this.showPrevPage()}
-            >
+            <button className="btn" id="prev-page" onClick={this.showPrevPage}>
               <i className="fas fa-arrow-circle-left" /> Prev Page
             </button>
-            <button
-              className="btn"
-              id="next-page"
-              onClick={() => this.showNextPage()}
-            >
+            <button className="btn" id="next-page" onClick={this.showNextPage}>
               Next Page <i className="fas fa-arrow-circle-right" />
             </button>
             <span className="page-info">
